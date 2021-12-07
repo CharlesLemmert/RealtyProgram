@@ -37,6 +37,7 @@ public class Server {
     private JFrame parentComponent = new JFrame();
     
     private ArrayList cust = new ArrayList();
+    private ArrayList custSur = new ArrayList();
     private Statement s;
     
     public Server() {
@@ -149,13 +150,17 @@ public class Server {
                         bufferedWriter.write(adr+"\n");
                         bufferedWriter.write(rnt+"\n");
                         bufferedWriter.write(prop+"\n");
-                    } else if(input0.equals(RetrieveCust)){
+                    } 
+                    else if(input0.equals(RetrieveCust)){
                         RetrieveCustomer();
                         
                         for (int i = 0; i < cust.size(); i++) {
                             String name = cust.get(i).toString();
-                            bufferedWriter.write(name);
-                            bufferedWriter.newLine();
+                            bufferedWriter.write(name+"\n");
+                            
+                            String surname = cust.get(i).toString();
+                            bufferedWriter.write(surname+"\n");
+                            //bufferedWriter.newLine();
                         }
                     }
                     
@@ -327,11 +332,13 @@ public class Server {
     
     public void RetrieveCustomer() {
         String nameClient;
+        String firstnameClient;
+        String surnameClient;
 
         String sqlQuery = "select * from CUSTOMERS";
+        
         try {
             //psm = conn.prepareStatement(sqlQuery);
-
             s = conn.createStatement();
             
             //rs = psm.executeQuery();
@@ -339,11 +346,16 @@ public class Server {
             
             while(rs.next()){
                 //if (rs.next() == true) {
+                    //nameClient = rs.getString(2);
                     nameClient = rs.getString(2);
+                    surnameClient = rs.getString(3);
+                    
                     cust.add(nameClient);
+                    custSur.add(surnameClient);
                     
                     for (int i = 0; i < cust.size(); i++) {
-                        System.out.println(cust.get(i));
+                        System.out.println(cust.get(i).toString());
+                        System.out.println(custSur.get(i).toString());
                     }
                     
                 

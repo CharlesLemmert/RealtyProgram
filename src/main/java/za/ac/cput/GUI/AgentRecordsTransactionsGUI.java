@@ -58,7 +58,7 @@ public class AgentRecordsTransactionsGUI implements ActionListener {
     private JButton btnTransact;
     private JButton btnBack;
     
-   
+    private ClientAdmin ad = new ClientAdmin();
 
     public AgentRecordsTransactionsGUI() {
         
@@ -108,12 +108,13 @@ public class AgentRecordsTransactionsGUI implements ActionListener {
         //bxCustomer.addItem(c.customerNames);
         //System.out.println("\nThe combo box values have been set\n");
         
-        ClientAdmin ad = new ClientAdmin();
+        //ClientAdmin ad = new ClientAdmin();
         ad.RetrieveCust();
         
         for (int i = 0; i < ad.cust.size(); i++) {
-            bxCustomer.addItem(ad.cust.indexOf(i));
-            System.out.println(ad.cust.indexOf(i));
+            bxCustomer.addItem(ad.cust.get(i).toString());
+            
+            System.out.println(ad.cust.get(i).toString());
         }
         
         window.setSize(850, 480);
@@ -291,9 +292,12 @@ public class AgentRecordsTransactionsGUI implements ActionListener {
             //send request to client?
 
         }
-        if(e.getSource() == bxCustomer){
+        if(e.getSource() == bxCustomer.getSelectedItem()){
             //ClientAgent c = new ClientAgent();
             //bxCustomer.addItem(c.customerNames);
+            
+            //txtName.setText(ad.cust.get(i).toString());
+            //txtSurname.setText(ad.custSur.get(i).toString());
             
             /**
             ClientAdmin ad = new ClientAdmin();

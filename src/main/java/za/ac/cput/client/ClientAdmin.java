@@ -28,6 +28,7 @@ public class ClientAdmin {
     public String prop;
     
     public ArrayList cust = new ArrayList();
+    public ArrayList custSur = new ArrayList();
     
     public void RetrieveCust() {
         System.out.println("Client is connecting to server now...");
@@ -56,7 +57,7 @@ public class ClientAdmin {
             bufferedWriter = new BufferedWriter(outputStreamWriter);
 
             while (socket.isClosed() == false) {
-                System.out.println("Client is sending information to the server...\n");
+                System.out.println("Client is getting information from the server...\n");
 
                 //message that will be sent to the server
                 String save = "RetrieveCustomer";
@@ -66,15 +67,21 @@ public class ClientAdmin {
                 //this flushes the writer when the buffer is full
                 bufferedWriter.flush();
                 
-                while(bufferedReader.read() != 0){
+                //while(bufferedReader.read() > 0){
+                while(cust.size() < 2){
                     String name = bufferedReader.readLine();
-                    //String name2 = bufferedReader.readLine();
+                    
                     cust.add(name);
-                    //cust.add(name2);
+                    
+                    String surname = bufferedReader.readLine();
+                    
+                    custSur.add(surname);
                 }
+                //}
                 
                 for (int i = 0; i < cust.size(); i++) {
-                    System.out.println(cust.get(i));
+                    System.out.println(cust.get(i).toString());
+                    System.out.println(cust.get(i).toString());
                 }
                 
                 
